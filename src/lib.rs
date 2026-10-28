@@ -16,6 +16,7 @@ impl SimpleTokenizer {
     }
 }
 
+
 /// PyO3 module entry point
 /// Python module definition
 #[pymodule]
