@@ -64,103 +64,25 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-If the project is using `tiktoken` directly, you can also install it manually:
-
-```bash
-pip install tiktoken
-```
 
 ## Usage
 
 A typical usage pattern looks like this:
 
-```python
-from mini_tiktoken import get_encoding
 
-text = "Hello, world! This is a mini tiktoken project."
-encoding = get_encoding("cl100k_base")
+```
+from mini_tiktoken import Tokenizer
 
-tokens = encoding.encode(text)
-print(tokens)
-print(len(tokens))
-print(encoding.decode(tokens))
+t = Tokenizer()
+print(t.tokenize("Hello from Rust and Python"))
+
 ```
 
-You can also count tokens without converting to text manually:
 
-```python
-from mini_tiktoken import count_tokens
 
-prompt = "How many tokens are in this sentence?"
-print(count_tokens(prompt, encoding_name="cl100k_base"))
-```
 
-## Example Workflow
-
-```python
-from mini_tiktoken import get_encoding
-
-system_message = "You are a helpful assistant."
-user_message = "Summarize the benefits of token counting in simple terms."
-
-enc = get_encoding("cl100k_base")
-
-messages = [
-    {"role": "system", "content": system_message},
-    {"role": "user", "content": user_message},
-]
-
-prompt = "\n".join(
-    f"{m['role']}: {m['content']}" for m in messages
-)
-
-token_count = len(enc.encode(prompt))
-print(f"Estimated prompt tokens: {token_count}")
-```
-
-## Common Encoding Names
-
-Many GPT-style encoding names are commonly used, including:
-
-- `gpt2`
-- `r50k_base`
-- `p50k_base`
-- `cl100k_base`
-
-The appropriate encoding depends on the model or API provider you are targeting.
-
-## Project Structure
-
-```text
-mini_tiktoken_project/
-├── README.md
-├── requirements.txt
-├── mini_tiktoken/
-│   ├── __init__.py
-│   ├── encoder.py
-│   ├── tokenizer.py
-│   └── utils.py
-├── tests/
-│   └── test_tokenizer.py
-├── setup.py
-└── pyproject.toml
-```
 
 The structure may vary depending on how the project is organized, but the core idea remains the same: a small tokenizer implementation and test coverage for expected behavior.
-
-## Running Tests
-
-If the repository includes unit tests, run them with:
-
-```bash
-pytest
-```
-
-Or, if using Python's built-in test runner:
-
-```bash
-python -m unittest discover
-```
 
 ## Notes
 
@@ -171,22 +93,6 @@ This project is intentionally compact. It is useful for:
 - understanding token budget limits before calling APIs
 - experimenting with custom text preprocessing
 
-## Contributing
-
-Contributions are welcome. You can help by:
-
-- improving the tokenizer logic
-- adding more encoding support
-- increasing test coverage
-- documenting edge cases and examples
-
-To contribute:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run the relevant tests
-5. Submit a pull request
 
 ## License
 
